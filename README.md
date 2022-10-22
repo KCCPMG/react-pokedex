@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+React Props: Pokedex
+====================
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This exercise lets you pratice using React components and properties.
 
-## Available Scripts
+Create a pokemon application (a “pokedex”) that displays an interface that looks like this:
 
-In the project directory, you can run:
+[![_images/pokedex.png](https://curric.springboard.com/software-engineering-career-track/default/exercises/react-props-pokedex/_images/pokedex.png)](https://curric.springboard.com/software-engineering-career-track/default/exercises/react-props-pokedex/_images/pokedex.png)
 
-### `npm start`
+To create the pokedex, you should use 3 components:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+App
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+This should just render a single Pokedex.
 
-### `npm test`
+(It’s common for the top-level app to not have direct logic in it, but to render the top application object — this becomes useful when you build sites that compose several different parts together.)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Pokecard
 
-### `npm run build`
+Shows a single Pokemon, with their name, image, and type.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Pokedex
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Is provided, via props, an array of objects describing different pokemon, and renders a sequence of **_Pokecard_** components.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Use the defaultProps feature of **_Pokedex_** to provide a default list of Pokemon characters to show. You can use this list for a good set of defaults:
+```
+    [
+      {id: 4, name: 'Charmander', type: 'fire', base_experience: 62},
+      {id: 7, name: 'Squirtle', type: 'water', base_experience: 63},
+      {id: 11, name: 'Metapod', type: 'bug', base_experience: 72},
+      {id: 12, name: 'Butterfree', type: 'flying', base_experience: 178},
+      {id: 25, name: 'Pikachu', type: 'electric', base_experience: 112},
+      {id: 39, name: 'Jigglypuff', type: 'normal', base_experience: 95},
+      {id: 94, name: 'Gengar', type: 'poison', base_experience: 225},
+      {id: 133, name: 'Eevee', type: 'normal', base_experience: 65}
+    ]
+``` 
 
-### `npm run eject`
+For each pokemon, their image source should be: **_https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png_**.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Further Study: More Pokemon!
+----------------------------
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Pokegame Component
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Modify your component hierarchy so that **_App_** renders a component called **_Pokegame_**. **_Pokegame_** should take your list of 8 pokemon and randomly assign them into two hands of 4 cards each. It should then render two **_Pokedex_** components, one for each hand.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Once you’ve got this working, modify your **_Pokegame_** so that it also calculates the total experience for each hand of pokemon. It should pass this total to the **_Pokedex_**.
 
-## Learn More
+Next, have the **_Pokegame_** component determine which hand is the “winner,” where the winning hand is the one with the higher total experience. Then modify the **_Pokedex_** component one more time so that it accepts a prop of **_isWinner_**. If the **_Pokedex_** is the winning one, it should display the message “THIS HAND WINS!” at the bottom of the deck.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Now when you load the page, you should see two different hands with a randomly changing winner every time you refresh.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Styling
 
-### Code Splitting
+Add styling to your components — perhaps you can do interesting things when hovering over a Pokecard, or have them smoothly transition into the page, all via CSS?
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Further Study: Basic Blackjack!
+-------------------------------
 
-### Analyzing the Bundle Size
+Blackjack is a popular card game. You don’t know enough about React to build your own blackjack game yet, but you know enough to handle the beginning of the game.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Build a React app that automatically deals you two cards from a 52-card deck. Each card has a score assigned to it: aces will be worth 11; tens, jacks, queens, and kings will be worth 10; every other card will be worth its value (twos will be worth 2, threes will be worth 3, etc.)
 
-### Making a Progressive Web App
+Using URLs from the Deck of Cards API (e.g. [https://deckofcardsapi.com/static/img/9H.png](https://deckofcardsapi.com/static/img/9H.png)), show images of the two random cards on the page, along with the total score for those two cards. If the score is 21, show an additional message letting the user know that they have blackjack!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Note that the two cards you display must be different. You also don’t need to worry about any other functionality from the game of blackjack. If you want different cards, you’ll have to refresh the page.
 
-### Advanced Configuration
+Here’s an image of what the app might look like:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+[![_images/blackjack.png](https://curric.springboard.com/software-engineering-career-track/default/exercises/react-props-pokedex/_images/blackjack.png)](https://curric.springboard.com/software-engineering-career-track/default/exercises/react-props-pokedex/_images/blackjack.png)
 
-### Deployment
+Spend some time talking with your partner about the component design for this application, if you decide to give it a shot.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Solution
+--------
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[View our Solution](https://curric.springboard.com/software-engineering-career-track/default/exercises/react-props-pokedex/solution/index.html)
